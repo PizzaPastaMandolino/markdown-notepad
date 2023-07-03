@@ -1,0 +1,69 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-size: 16px;
+}
+
+button {
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  color: #08c;
+}
+
+.side-note {
+  width: 30%;
+  height: 100vh;
+  border-right: 1px solid #ddd;
+}
+
+.side-note-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.note {
+  height: calc(100vh - 78px);
+  overflow-y: scroll;
+}
+
+.nota {
+  padding: 25px;
+  cursor: pointer;
+}
+
+.nota:hover {
+  background: #ddd;
+}
+
+.NoteMain {
+  display: flex;
+}
+
+.plus {
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.trash {
+  font-size: 1.5rem;
+  color: red;
+}
+
+.trash:hover {
+  background-color: #ddd;
+}
