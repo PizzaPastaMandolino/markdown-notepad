@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsPlusCircleFill, BsFillTrashFill } from "react-icons/bs";
 
-const SideNote = () => {
+const SideNote = ({setText, setIsSelected}) => {
   //state per le note
   const [note, setNote] = useState([]);
 
@@ -34,6 +34,7 @@ const SideNote = () => {
       };
       await axios.post("http://localhost:3030/note", newNota);
       fetchAllNotes();
+      console.log("fetching all notes addNota");
     } catch (error) {
       console.log(error);
     }
@@ -42,11 +43,11 @@ const SideNote = () => {
   //funzione per rimuovere una nota dal DB e quindi dalla sidebar delle note
   const removeNota = async (id_note) => {
     try {
-      console.log(id_note);
       await axios.delete("http://localhost:3030/note/delete", {
         data: { id_note: id_note },
       });
       fetchAllNotes();
+      console.log("fetching all notes removeNota");
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +55,7 @@ const SideNote = () => {
 
   useEffect(() => {
     fetchAllNotes();
-    console.log("run");
+    console.log("fetching all notes from useEffect");
   }, []);
 
   return (
@@ -63,9 +64,14 @@ const SideNote = () => {
         <h1>Note</h1>
         <BsPlusCircleFill className="plus" onClick={() => addNota()} />
       </div>
-      <div className="note">
+      <div className="note" >
         {note.map((nota) => (
-          <div className="nota" key={nota.id_note}>
+          <div className="nota" key={nota.id_note}
+            onMouseDown={() => {
+              setIsSelected(true);
+              setText(nota.note_testo);
+            }}
+          >
             <h2>{nota.titolo_note}</h2>
             <p>{nota.note_testo && nota.note_testo.substr(0, 40) + "..."}</p>
             <p>{nota.ultimaModifica}</p>

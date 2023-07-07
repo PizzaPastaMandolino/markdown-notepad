@@ -67,3 +67,13 @@ button {
 .trash:hover {
   background-color: #ddd;
 }
+
+.container {
+  width: 100%;
+}
+
+.selectNote {
+  font-weight: 700;
+  font-size: 5rem;
+  text-align: center;
+}
