@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const Main = ({text, isSelected}) => {
     console.log(text);
-    let string = text;
     const [value, setValue] = useState(text);
     return (
         <div className="container">
