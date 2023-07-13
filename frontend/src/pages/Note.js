@@ -2,13 +2,19 @@ import SideNote from "../components/SideNote";
 import Main from "../components/Main";
 import { useState } from "react";
 
+const initialState = {
+  text: "",
+  title: "",
+  id: "",
+  isSelected: false,
+};
+
 const Note = () => {
-  const [text, setText] = useState();
-  const [isSelected, setIsSelected] = useState(false);
+  const [state, setState] = useState(initialState);
   return (
     <div className="NoteMain">
-      <SideNote setText={setText} setIsSelected={setIsSelected}/>
-      <Main text={text} isSelected={isSelected} />
+      <SideNote setState={setState} state={state} />
+      <Main state={state} />
     </div>
   );
 };

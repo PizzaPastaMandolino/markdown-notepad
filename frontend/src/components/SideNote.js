@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsPlusCircleFill, BsFillTrashFill } from "react-icons/bs";
 
-const SideNote = ({setText, setIsSelected}) => {
+const SideNote = ({ setState, state, ref }) => {
   //state per le note
   const [note, setNote] = useState([]);
-
   //funzione che con GET prende tutte le note dal DB le inserisce dentro lo state per poi visualizzarle con l'HTML
   //la funzione viene eseguita con un useEffect cosi da farla avviare ogni volta che la pagina carica o il DB cambia
   const fetchAllNotes = async () => {
@@ -64,12 +63,19 @@ const SideNote = ({setText, setIsSelected}) => {
         <h1>Note</h1>
         <BsPlusCircleFill className="plus" onClick={() => addNota()} />
       </div>
-      <div className="note" >
+      <div className="note">
         {note.map((nota) => (
-          <div className="nota" key={nota.id_note}
+          <div
+            className="nota"
+            key={nota.id_note}
             onMouseDown={() => {
-              setIsSelected(true);
-              setText(nota.note_testo);
+              const newState = {
+                text: nota.note_testo,
+                title: nota.titolo_note,
+                id: nota.id_note,
+                isSelected: true,
+              };
+              setState({ ...state, ...newState });
             }}
           >
             <h2>{nota.titolo_note}</h2>

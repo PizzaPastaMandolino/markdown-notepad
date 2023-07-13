@@ -75,11 +75,12 @@ app.delete("/note/delete", (req, res) => {
 
 app.post("/note/update", (req, res) => {
   const q =
-    "UPDATE note SET `titolo_note` = (?), `note_testo`= (?) WHERE `id_utenti` = (?)";
-  const titolo_note = [req.body.titolo_note];
+    "UPDATE note SET `titolo_note` = (?), `note_testo`= (?), `ultimaModifica`= (?) WHERE `id_note` = (?)";
+  const titolo_note = [req.body.titolo_nota];
   const note_testo = [req.body.note_testo];
-  const id_utenti = [req.body.id_utenti];
-  db_utenti.query(q, [titolo_note, note_testo, id_utenti], (err, data) => {
+  const ultimaModifica = [req.body.ultimaModifica];
+  const id_note = [req.body.id_note];
+  db_utenti.query(q, [titolo_note, note_testo, ultimaModifica, id_note], (err, data) => {
     if (err) return res.json(err);
     else return res.json(data);
   });

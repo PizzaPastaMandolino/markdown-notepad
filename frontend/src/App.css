@@ -62,6 +62,7 @@ button {
 .trash {
   font-size: 1.5rem;
   color: red;
+  cursor: pointer;
 }
 
 .trash:hover {
@@ -76,4 +77,34 @@ button {
   font-weight: 700;
   font-size: 5rem;
   text-align: center;
+}
+
+.title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.row-title {
+  font-weight: 600;
+  font-size: 50px;
+  margin-right: 20px;
+}
+
+input[type="text"] {
+  font-size: 20px;
+  height: 40px;
+  box-sizing: border-box; 
+  letter-spacing: 1px;
+  width: 50%;
+  border: 0; 
+  border-bottom: 1px solid #828080;
+}
+
+input[type="text"]:focus {outline: none;}
+
+.save {
+  margin: 20px 0 0 20px;
+  font-size: 3.5rem;
+  cursor: pointer;
 }
