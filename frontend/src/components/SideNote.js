@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { BsPlusCircleFill, BsFillTrashFill } from "react-icons/bs";
+import ReactMarkdown from "react-markdown";
 
-const SideNote = ({ setState, state, ref }) => {
+const SideNote = ({ setState, state, note, setNote }) => {
   //state per le note
-  const [note, setNote] = useState([]);
   //funzione che con GET prende tutte le note dal DB le inserisce dentro lo state per poi visualizzarle con l'HTML
   //la funzione viene eseguita con un useEffect cosi da farla avviare ogni volta che la pagina carica o il DB cambia
+
   const fetchAllNotes = async () => {
     try {
       const res = await axios.get("http://localhost:3030/note");
@@ -55,7 +56,7 @@ const SideNote = ({ setState, state, ref }) => {
   useEffect(() => {
     fetchAllNotes();
     console.log("fetching all notes from useEffect");
-  }, []);
+  });
 
   return (
     <div className="side-note">
@@ -79,7 +80,11 @@ const SideNote = ({ setState, state, ref }) => {
             }}
           >
             <h2>{nota.titolo_note}</h2>
-            <p>{nota.note_testo && nota.note_testo.substr(0, 40) + "..."}</p>
+            <p>
+              <ReactMarkdown>
+                {nota.note_testo && nota.note_testo.substr(0, 40) + "..."}
+              </ReactMarkdown>
+            </p>
             <p>{nota.ultimaModifica}</p>
             <BsFillTrashFill
               className="trash"

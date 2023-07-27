@@ -11,10 +11,17 @@ const initialState = {
 
 const Note = () => {
   const [state, setState] = useState(initialState);
+  const [note, setNote] = useState([]);
+
   return (
     <div className="NoteMain">
-      <SideNote setState={setState} state={state} />
-      <Main state={state} />
+      <SideNote
+        setState={setState}
+        state={state}
+        note={note}
+        setNote={setNote}
+      />
+      <Main state={state} note={note} setNote={setNote} />
     </div>
   );
 };

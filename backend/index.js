@@ -1,43 +1,33 @@
 import express from "express";
 import cors from "cors";
 import mysql from "mysql2";
-import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: __dirname + "/config.env" });
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+const HOST = process.env.HOST;
+const USER = process.env.USER;
+const DB = process.env.DB;
+
 const db_utenti = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "notepad",
+  host: HOST,
+  user: USER,
+  database: DB,
 });
 
 app.listen(3030, () => {
   console.log(`listening on 3030`);
 });
-
-// app.get("/utenti", (req, res) => {
-//   //const match = bcrypt.compare("ciao", res.json(data.password[1]));
-//   //if(match) console.log("si");
-//   db_utenti.query("SELECT * FROM utenti", (err, data) => {
-//     if (err) return res.json(err);
-//     else {
-//       return res.json(data);
-//     }
-//   });
-// });
-
-// app.post("/utenti", async (req, res) => {
-//   const salt = await bcrypt.genSalt();
-//   const hashed_password = await bcrypt.hash(req.body.password, salt);
-//   const q = "INSERT INTO utenti (`username`,`password`) VALUES (?)";
-//   const values = [req.body.username, hashed_password];
-//   db_utenti.query(q, [values], (err, data) => {
-//     if (err) return res.json(err);
-//     else return res.json(data);
-//   });
-// });
 
 app.get("/note", (req, res) => {
   db_utenti.query(
@@ -80,8 +70,12 @@ app.post("/note/update", (req, res) => {
   const note_testo = [req.body.note_testo];
   const ultimaModifica = [req.body.ultimaModifica];
   const id_note = [req.body.id_note];
-  db_utenti.query(q, [titolo_note, note_testo, ultimaModifica, id_note], (err, data) => {
-    if (err) return res.json(err);
-    else return res.json(data);
-  });
+  db_utenti.query(
+    q,
+    [titolo_note, note_testo, ultimaModifica, id_note],
+    (err, data) => {
+      if (err) return res.json(err);
+      else return res.json(data);
+    }
+  );
 });
