@@ -1,6 +1,8 @@
 import MDEditor, { commands } from "@uiw/react-md-editor";
 import { useState, useEffect } from "react";
 import { FaSave } from "react-icons/fa";
+import { IoIosArrowBack } from "react-icons/io";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import axios from "axios";
 
 const Main = ({ state }) => {
@@ -26,13 +28,17 @@ const Main = ({ state }) => {
         }),
         id_note: state.id,
       };
-      console.log(updateNota);
       await axios.post("http://localhost:3030/note/update", updateNota);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const returnBack = () => {
+    state.isSelected = false;
+  };
+
+  const mediaQuery = useMediaQuery("(max-width : 768px)");
   const help = {
     name: "help",
     keyCommand: "help",
@@ -76,6 +82,11 @@ const Main = ({ state }) => {
           />
         </div>
         <FaSave className="save" onClick={() => updateNote()} />
+        {mediaQuery ? (
+          <IoIosArrowBack className="back" onClick={() => returnBack()} />
+        ) : (
+          ""
+        )}
       </>
     </div>
   );
