@@ -63,7 +63,6 @@ const Main = ({ state }) => {
     >
       <>
         <div className="title">
-          <span className="row-title">Titolo Nota</span>
           <input
             type="text"
             className="title-content"

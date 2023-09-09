@@ -45,6 +45,16 @@ const SideNote = ({ setState, state, note, setNote }) => {
     }
   };
 
+  const handleRemoveNota = (id_note) => {
+    const userConfirm = window.confirm(
+      "Sei sicuro di voler elimare questa nota?"
+    );
+    if (userConfirm) {
+      removeNota(id_note);
+      state.isSelected = false;
+    }
+  };
+
   useEffect(() => {
     fetchAllNotes();
     console.log("fetching all notes from useEffect");
@@ -61,7 +71,7 @@ const SideNote = ({ setState, state, note, setNote }) => {
           <div
             className="nota"
             key={nota.id_note}
-            onMouseDown={() => {
+            onClick={() => {
               const newState = {
                 text: nota.note_testo,
                 title: nota.titolo_note,
@@ -78,10 +88,19 @@ const SideNote = ({ setState, state, note, setNote }) => {
               </ReactMarkdown>
             </p>
             <p>{nota.ultimaModifica}</p>
-            <BsFillTrashFill
+            <button
               className="trash"
-              onClick={() => removeNota(nota.id_note)}
-            />
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRemoveNota(nota.id_note);
+              }}
+              onTouchStart={(e) => {
+                e.stopPropagation();
+                handleRemoveNota(nota.id_note);
+              }}
+            >
+              <BsFillTrashFill />
+            </button>
           </div>
         ))}
       </div>
