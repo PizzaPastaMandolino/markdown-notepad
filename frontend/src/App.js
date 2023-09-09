@@ -1,8 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Note from './pages/Note';
-import Login from './pages/Login';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Note from "./pages/Note";
 
 function App() {
   return (
@@ -10,7 +8,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Note />} />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>

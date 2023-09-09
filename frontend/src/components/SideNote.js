@@ -4,10 +4,6 @@ import { BsPlusCircleFill, BsFillTrashFill } from "react-icons/bs";
 import ReactMarkdown from "react-markdown";
 
 const SideNote = ({ setState, state, note, setNote }) => {
-  //state per le note
-  //funzione che con GET prende tutte le note dal DB le inserisce dentro lo state per poi visualizzarle con l'HTML
-  //la funzione viene eseguita con un useEffect cosi da farla avviare ogni volta che la pagina carica o il DB cambia
-
   const fetchAllNotes = async () => {
     try {
       const res = await axios.get("http://localhost:3030/note");
@@ -17,10 +13,8 @@ const SideNote = ({ setState, state, note, setNote }) => {
     }
   };
 
-  //funzione per aggiungere una nota al DB con una richiesta post al DB
   const addNota = async () => {
     try {
-      //cio che viene aggiungo nel DB
       const newNota = {
         titolo_note: "Titolo Nota",
         note_testo: "",
@@ -39,8 +33,6 @@ const SideNote = ({ setState, state, note, setNote }) => {
       console.log(error);
     }
   };
-
-  //funzione per rimuovere una nota dal DB e quindi dalla sidebar delle note
   const removeNota = async (id_note) => {
     try {
       await axios.delete("http://localhost:3030/note/delete", {
@@ -59,7 +51,7 @@ const SideNote = ({ setState, state, note, setNote }) => {
   });
 
   return (
-    <div className="side-note">
+    <div className={`side-note ${state.isSelected ? "selected" : ""}`}>
       <div className="side-note-title">
         <h1>Note</h1>
         <BsPlusCircleFill className="plus" onClick={() => addNota()} />

@@ -51,33 +51,32 @@ const Main = ({ state }) => {
   };
 
   return (
-    <div className="container">
-      {state.isSelected ? (
-        <>
-          <div className="title">
-            <span className="row-title">Titolo Nota</span>
-            <input
-              type="text"
-              className="title-content"
-              maxLength={120}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div data-color-mode="light">
-            <MDEditor
-              value={value}
-              onChange={setValue}
-              commands={[...commands.getCommands(), help]}
-              height={568}
-              maxHeight={568}
-            />
-          </div>
-          <FaSave className="save" onClick={() => updateNote()} />
-        </>
-      ) : (
-        <div className="selectNote">Seleziona una nota</div>
-      )}
+    <div
+      className="container"
+      style={{ display: state.isSelected ? "block" : "none" }}
+    >
+      <>
+        <div className="title">
+          <span className="row-title">Titolo Nota</span>
+          <input
+            type="text"
+            className="title-content"
+            maxLength={120}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div data-color-mode="light">
+          <MDEditor
+            value={value}
+            onChange={setValue}
+            commands={[...commands.getCommands(), help]}
+            height={568}
+            maxHeight={568}
+          />
+        </div>
+        <FaSave className="save" onClick={() => updateNote()} />
+      </>
     </div>
   );
 };
